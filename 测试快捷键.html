@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>作业</title>
+  </head>
+  <style>
+    a{
+      text-decoration: none;
+    }
+    li{
+      list-style-type: none;
+      position: relative;
+      left: -30px;
+      top: -18px;
+    }
+    #ul{
+      display: none;
+    }
+    input{
+      outline: none;
+    }
+  </style>
+  <body>
+    <input type="text">
+    <ul id="ul">
+      <li><a href="javascript:;">我的分组</a></li>
+      <li><a href="javascript:;">我的分组</a></li>
+      <li><a href="javascript:;">我的分组</a></li>
+      <li><a href="javascript:;">我的分组</a></li>
+      <li><a href="javascript:;">我的分组</a></li>
+    </ul>
+    <script>
+      var oIpt = document.getElementsByTagName('input')[0];
+      var oUl = document.getElementById('ul');
+      var aLi = document.getElementsByTagName('li');
+      var aA = document.getElementsByTagName('a');
+      for(var i =0; i < aA.length; i ++){
+        aA[i].onfocus = function () {
+          this.style.color = 'red';
+        }
+      }
+      var g = 99999;
+      var j = 99999;
+      oIpt.onfocus = function () {
+        oUl.style.display = 'block';
+        oUl.style.opacity = '0.8，';
+      }
+      oIpt.onkeydown = function (ev) {
+        var event = ev || window.event;
+        event.keyCode == 38 ? (g --,A_background()) : null;
+        event.keyCode == 40 ? (g ++,A_background()) : null;
+        event.altKey == true && event.keyCode == 38 ? (j --,ctrl_background()) : null;
+        event.altKey == true && event.keyCode == 40 ? (j ++,ctrl_background()) : null;
+      }
+      function A_background() {
+        for(var i = 0;i < aA.length; i++){
+          aA[i].style.backgroundColor = '';
+        }
+        aA[g%5].style.backgroundColor = 'grey';
+      }
+      function ctrl_background() {
+        if(aA[j%5].style.backgroundColor == 'grey'){
+          aA[j%5].style.backgroundColor = '';
+        }else {
+          aA[j%5].style.backgroundColor = 'grey';
+        }
+        console.log(j)
+      }
+    </script>
+  </body>
+</html>
